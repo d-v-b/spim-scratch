@@ -15,7 +15,6 @@ for ind, val in enumerate(base_dirs):
     base_dirs[ind] += sep
 
 def convert(v, verbose=False):
-    from fish.image.vol import get_stack_data
     from fish.util.fileio import image_conversion
     image_conversion(v, dest_fmt = 'h5', wipe=True)
     
@@ -38,6 +37,9 @@ def process_images(base_dir):
 
 
 if __name__ == '__main__':    
+    
     for base_dir in base_dirs:
-        process_images(base_dir)                    
+        process_images(base_dir)
+    
+    print('Finished compressing images.')                    
     
