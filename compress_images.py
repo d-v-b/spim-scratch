@@ -9,7 +9,7 @@ Created on Thu May  4 16:25:34 2017
 # List of directories with images to compress
 from glob import glob
 from os.path import sep
-base_dirs = glob('F:/davis/20170502/*')
+base_dirs = glob('F:/davis/20170430/*')
 
 for ind, val in enumerate(base_dirs):
     base_dirs[ind] += sep
@@ -37,7 +37,7 @@ def process_images(base_dir):
 
 
 if __name__ == '__main__':    
-    
+    print('Begin compressing images.')
     for base_dir in base_dirs:
         process_images(base_dir)
     
