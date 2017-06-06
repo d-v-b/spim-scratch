@@ -8,10 +8,20 @@ Created on Thu May  4 16:25:34 2017
 """
 # List of directories with images to compress
 from glob import glob
-from os.path import sep
+from os import remove, walk
+from os.path import split, sep, join
 
-base_dirs = glob('F:\\Maarten\\20170414\\*', recursive=True)
+Dirs = [   'F:\\Yu\\20170602\\fish1\\'
+]
 
+for y in range(0, len(Dirs)):
+        rawDir= Dirs[y]
+        print (Dirs[y])
+        base_dirs = list()
+        for root, dirs, files in walk(rawDir, topdown=False):
+            for name in dirs:
+                base_dirs.append(join(root, name))
+                
 for ind, val in enumerate(base_dirs):
     base_dirs[ind] += sep
 
@@ -40,6 +50,7 @@ def process_images(base_dir):
 if __name__ == '__main__':    
     print('Begin compressing images.')
     for base_dir in base_dirs:
+        print(base_dir)
         process_images(base_dir)
     
     print('Finished compressing images.')                    
