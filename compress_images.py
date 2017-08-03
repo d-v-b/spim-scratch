@@ -6,11 +6,13 @@ Created on Thu May  4 16:25:34 2017
 
 @author: d-v-b
 """
-# List of directories with images to compress
+
 from glob import glob
 from os.path import sep
 
-base_dirs = glob('F:\\Maarten\\20170414\\*', recursive=True)
+# List of directories with images to compress
+
+base_dirs = glob('F:\\vmsr\\170730\\*')
 
 for ind, val in enumerate(base_dirs):
     base_dirs[ind] += sep
@@ -29,18 +31,22 @@ def process_images(base_dir):
     
     fnames = glob(base_dir + 'TM*.stack')
     if len(fnames) > 0:
-        num_workers = cpu_count()
+        num_workers = cpu_count()-1
         p = Pool(num_workers)
         p.map(convert, fnames)
         p.close()
     else:
-        print('No .stack files found in {0}'.format(base_dir))
+        print('No stack files found in {0}'.format(base_dir))
 
 
 if __name__ == '__main__':    
     print('Begin compressing images.')
     for base_dir in base_dirs:
-        process_images(base_dir)
-    
+        print(base_dir)
+        try:
+            process_images(base_dir)
+        except:
+            print('Problem compressing data in {0}'.format(base_dir))
+            pass
     print('Finished compressing images.')                    
     
