@@ -10,13 +10,13 @@ from glob import glob
 from os import remove, walk
 from os.path import split, sep, join
 
-Dirs = [   'F:\\Maarten\\20170606\\'
-]
+Dirs = glob('F:\\Maarten\\2018032\\*')
+print(Dirs)
 
 for y in range(0, len(Dirs)):
         rawDir= Dirs[y]
         print (Dirs[y])
-        base_dirs = list()
+        base_dirs = []
         for root, dirs, files in walk(rawDir, topdown=False):
             for name in dirs:
                 base_dirs.append(join(root, name))

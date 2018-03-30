@@ -8,7 +8,7 @@ Created on Wed Oct  4 13:44:56 2017
 def trigger_data(triggers, window, fnames, average=False, single_plane = False, z=None):
     from numpy import array, memmap
     from fish.image.vol import get_stack_dims
-    from fish.util.fileio import load_image
+    from fish.util.fileio import load_image, load_images
     from os.path import split, sep
 
     dims = get_stack_dims(split(fnames[0])[0] + sep)[::-1]
@@ -16,14 +16,16 @@ def trigger_data(triggers, window, fnames, average=False, single_plane = False, 
     
     for ind, trig in enumerate(triggers):
         
-        tr = []        
+        tr = []
+                
         for t_w in window:
             if single_plane:
                 tr.append(load_single_plane(fnames, trig + t_w, tuple(dims)))
             elif z is None:
                 tr.append(load_image(fnames[trig + t_w]))
             else:
-                tr.append(array(memmap(fnames[trig + t_w], shape=tuple(dims), dtype='uint16')[z]))
+                tr.append(array(memmap(fnames[trig + t_w], shape=tuple(dims), dtype='uint16')[z]))        
+        
         tr = array(tr)
         
         
